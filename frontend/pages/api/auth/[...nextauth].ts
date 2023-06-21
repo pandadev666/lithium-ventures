@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import * as API from "@/api";
 
 const AuthOptions = {
     providers: [
@@ -7,14 +8,17 @@ const AuthOptions = {
             type: 'credentials',
             credentials: {},
             async authorize(credentials, req) {
-                const {email, password} = credentials as {
-                    email: string,
-                    password: string,
-                };
-                if(email !== 'smartguy.panda666@gmail.com' || password !== "123456") {
-                    throw new Error('invalid credentials');
+                try {
+                    const response = await API.signin(credentials);
+                    if (response.status == "success") {
+                        return response.user
+                    }
+                    else {
+                        throw new Error(response.error)
+                    }
+                } catch (e) {
+                    throw new Error("Server Error!")
                 }
-                return {id: 1, name: 'PandaDev', email: 'smartguy.panda666@gmail.com'}
             }
         }),
     ],
