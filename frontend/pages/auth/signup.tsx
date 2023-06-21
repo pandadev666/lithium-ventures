@@ -2,6 +2,8 @@ import { NextPage } from "next";
 import { FormEventHandler, useState } from "react";
 import Router from "next/router";
 
+import UnAuthLayout from "@/layout/unauthlayout";
+
 import Input from "@/components/input";
 import Button from "@/components/button";
 
@@ -17,23 +19,23 @@ const SignUp: NextPage = (props): JSX.Element => {
     }
     const handleSubmit = async () => {
         if (!Validator.email(userInfo.email)) {
-            alert("Invalid Email!");
+            alert("Email is invalid!");
             return;
         }
         else if(!Validator.string(userInfo.name)) {
-            alert("Invalid Name!");
+            alert("You should input name!");
             return;
         }
         else if(!Validator.password(userInfo.password)) {
-            alert("Invalid Password!");
+            alert("Password should be longer than 6!");
             return;
         }
         else if(!Validator.password(userInfo.confirmpassword)) {
-            alert("Invalid Password Confirmation!");
+            alert("Confirming password should be longer than 6!");
             return;
         }
         else if(userInfo.password != userInfo.confirmpassword) {
-            alert("Password not matched!");
+            alert("Password confirmation failed!");
             return;
         }
         try {
@@ -49,42 +51,44 @@ const SignUp: NextPage = (props): JSX.Element => {
         }
     }
     return (
-        <form
-            className="flex flex-col items-center w-80"
-            onSubmit={preventSubmit}
-            noValidate
-        >
-            <Input
-                value={userInfo.email}
-                onChange={(val: string) => setUserInfo({...userInfo, email: val})}
-                type="email"
-                placeholder="Email"
-            />
-            <Input
-                value={userInfo.name}
-                onChange={(val: string) => setUserInfo({...userInfo, name: val})}
-                type="text"
-                placeholder="Name"
-            />
-            <Input
-                value={userInfo.password}
-                onChange={(val: string) => setUserInfo({...userInfo, password: val})}
-                type="password"
-                placeholder="Password"
-            />
-            <Input
-                value={userInfo.confirmpassword}
-                onChange={(val: string) => setUserInfo({...userInfo, confirmpassword: val})}
-                type="password"
-                placeholder="Confirm Password"
-            />
-            <Button
-                className="w-1/3 mt-3"
-                onClick={handleSubmit}
+        <UnAuthLayout>
+            <form
+                className="flex flex-col items-center w-80"
+                onSubmit={preventSubmit}
+                noValidate
             >
-                SignUp
-            </Button>
-        </form>
+                <Input
+                    value={userInfo.email}
+                    onChange={(val: string) => setUserInfo({...userInfo, email: val})}
+                    type="email"
+                    placeholder="Email"
+                />
+                <Input
+                    value={userInfo.name}
+                    onChange={(val: string) => setUserInfo({...userInfo, name: val})}
+                    type="text"
+                    placeholder="Name"
+                />
+                <Input
+                    value={userInfo.password}
+                    onChange={(val: string) => setUserInfo({...userInfo, password: val})}
+                    type="password"
+                    placeholder="Password"
+                />
+                <Input
+                    value={userInfo.confirmpassword}
+                    onChange={(val: string) => setUserInfo({...userInfo, confirmpassword: val})}
+                    type="password"
+                    placeholder="Confirm Password"
+                />
+                <Button
+                    className="w-1/3 mt-3"
+                    onClick={handleSubmit}
+                >
+                    SignUp
+                </Button>
+            </form>
+        </UnAuthLayout>
     )
 }
 
