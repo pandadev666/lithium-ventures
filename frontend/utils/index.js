@@ -3,7 +3,10 @@ export const Validator = {
         if (email == undefined || email.length == 0) return false;
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
     },
-    password: (str) => {
+    string: (str) => {
         return str != undefined && str.length > 0
+    },
+    password: (pwd) => {
+        return pwd != undefined && pwd.length > 0
     }
 }

@@ -6,4 +6,4 @@ const UserModel = mongoose.model("users", UserSchema);
 
 export {
     UserModel
-};
+}
