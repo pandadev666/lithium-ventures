@@ -1,4 +1,4 @@
-const api_endpoint = "https://localhost:8000";
+const api_endpoint = "http://localhost:8000";
 
 export const signin = async (credentials: any) => {
     const response = await fetch(`${api_endpoint}/auth/signin`, {

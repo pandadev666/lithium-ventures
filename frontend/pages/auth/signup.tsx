@@ -11,7 +11,7 @@ import * as API from "@/api";
 interface Props {}
 
 const SignUp: NextPage = (props): JSX.Element => {
-    const [userInfo, setUserInfo] = useState({ email: '', password: '', confirmpassword: ''});
+    const [userInfo, setUserInfo] = useState({ email: '', name: '', password: '', confirmpassword: ''});
     const preventSubmit:FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
     }
@@ -55,6 +55,12 @@ const SignUp: NextPage = (props): JSX.Element => {
                 onChange={(val: string) => setUserInfo({...userInfo, email: val})}
                 type="email"
                 placeholder="Email"
+            />
+            <Input
+                value={userInfo.name}
+                onChange={(val: string) => setUserInfo({...userInfo, name: val})}
+                type="text"
+                placeholder="Name"
             />
             <Input
                 value={userInfo.password}
