@@ -6,4 +6,4 @@
 2. Run Dev Server
     npm run dev
 
-You can visit http://localhost:3000 to see the result.
+Backend server will run at http://localhost:8000
