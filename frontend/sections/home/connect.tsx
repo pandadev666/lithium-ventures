@@ -3,9 +3,7 @@ import Link from "next/link";
 
 import Button from "@/components/button";
 
-interface Props {}
-
-const Connect: React.FC<Props> = (props: Props): JSX.Element => {
+const Connect: React.FC = (): JSX.Element => {
     return (
         <div className="flex flex-row items-center">
             <Link href="/auth/signin">

@@ -8,11 +8,9 @@ interface Props {
 }
 
 const Welcome: React.FC<Props> = ({username}: Props): JSX.Element => {
-
     const handleLogout = async () => {
         await signOut({callbackUrl: '/'});
     }
-
     return (
         <>
             <p className="text-xl mb-5">
