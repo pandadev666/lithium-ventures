@@ -18,7 +18,10 @@ if (mongo_uri) {
                 origin: process.env.FRONTEND_ORIGIN
             })));
             app.use(express.json())
+            
             app.post('/auth/signup', AuthController.SignUp);
+            app.post('/auth/signin', AuthController.SignIn);
+
             app.listen(port, () => {
                 console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
             });

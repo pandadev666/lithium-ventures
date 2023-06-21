@@ -20,6 +20,10 @@ const SignUp: NextPage = (props): JSX.Element => {
             alert("Invalid Email!");
             return;
         }
+        else if(!Validator.string(userInfo.name)) {
+            alert("Invalid Name!");
+            return;
+        }
         else if(!Validator.password(userInfo.password)) {
             alert("Invalid Password!");
             return;
