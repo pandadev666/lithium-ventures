@@ -22,9 +22,29 @@ After you have completed the task, please send us a .zip file of the repo, but f
 
 **Your name**
 
-`________________`
+`Christian Jin`
 
 **Why did you choose the tech you did?**
 
-`Don't worry about detailing every single package used, but try and justify some of your choices and your reason for making them. We want people who think in features, and how they impact the wider systems going forward, so we expect you to make reasoned decisions with intent!`
+Nice to meet you!
+I'm so glad to participate in this technical test for full stack engineer role.
 
+This web application are built up with two parts.
+1. Frontend Application (Developed with Next.js + Typescript)
+2. Backend Application (Developed with Express + Mongoose + MongoDB(atlas))
+
+As a huge fan of SSR, I've been working with Next.js for a long time and noticed that it's very useful to web applications which require quick loading as well as agile development.
+Comparing Next against React, React is more flexible for real-time web applications like chat, messenger, streamline apps but Next is better for building web applications which consist of static layouts like e-commerce or blog websites. Using Next, we can ensure quick loading as well as significant reduction in bundle size by arranging client side components inside static layouts(server side components). In addition, Next supports a lot of built-in features like dynamic page routing, api routing, typescript support, image optimization and etc.
+So this time, I've decided to go with Next since Lithium-Ventures is far away from real-time applications.
+
+In frontend development, I used next-auth package which supports session management for both of server-side and frontend-side. NextAuth is very useful to implement authentication process without configuring any redux store like in React. And it works with api-route.
+And for backend integration, I used Axios. Axios is powerful library. We can create axios instances for different backend integrations, manage response and request interceptors and set manual timeout. And also with axios, we can handle JSON serialization in a very easy step. For the purpose of scalability, Axios is better choice than any other built-in functions or libraries something like fetch or node-fetch.
+You can also figure out there are two layouts(Rootlayout and GuestLayout) in the code base. The purpose of RootLayout is to use a static layout to decrease the bundle size and GuestLayout was built for handling page routings which require authentication. Once a user logged in, he or she can not access to pages which are wrapped by GuestLayout. In similar way we can build AuthLayout. The Rootlayout contains Banner section which is visible in every page. And that's why I decided to build a static layout.
+
+In backend development, I used express.js + typescript since express.js is a light-weight backend framework compared with other node.js frameworks like Nest or something. Backend logic is very simple. We have 2 endpoints (auth/signin, auth/signup) and used MongoDB as a primary database. With the help of mongoose, I could easily handle database manipulation. I used cors module to get over cors policy issue and express.json to serialize json data in request body.
+
+For now, I haven't implmeneted token feature since it's just a MVP and we can handle session on frontend application using AuthNext.
+
+And to run this web application properly, you can follow readme files in 2 folders and make sure to tell me your ip address so that I can allow your ip to get access to my atlas database.
+
+Thanks.
