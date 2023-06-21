@@ -2,9 +2,7 @@ import React from "react"
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {}
-
-const Banner: React.FC = (props: Props): JSX.Element => {
+const Banner: React.FC = (): JSX.Element => {
     return (
         <Link href="/">
             <div className="flex flex-row items-center">

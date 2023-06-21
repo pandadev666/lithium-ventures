@@ -2,17 +2,13 @@ import { NextPage } from "next";
 import { FormEventHandler, useState } from "react";
 import Router from "next/router";
 
-import UnAuthLayout from "@/layout/unauthlayout";
-
+import GuestLayout from "@/layout/guest";
 import Input from "@/components/input";
 import Button from "@/components/button";
-
 import { Validator } from "@/utils";
-import * as API from "@/api";
+import * as API from "@/api/auth";
 
-interface Props {}
-
-const SignUp: NextPage = (props): JSX.Element => {
+const SignUp: NextPage = (): JSX.Element => {
     const [userInfo, setUserInfo] = useState({ email: '', name: '', password: '', confirmpassword: ''});
     const preventSubmit:FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
@@ -38,20 +34,14 @@ const SignUp: NextPage = (props): JSX.Element => {
             alert("Password confirmation failed!");
             return;
         }
-        try {
-            const response = await API.signup(userInfo);
-            if (response.status == "success") {
-                Router.replace("/auth/signin");
-            }
-            else {
-                alert(response.error)
-            }
-        } catch (e) {
-            alert("Server Error!")
-        }
+        await API.signup(userInfo)
+        .then((_) => {
+            Router.replace("/auth/signin");
+        })
+        .catch((err) => err);
     }
     return (
-        <UnAuthLayout>
+        <GuestLayout>
             <form
                 className="flex flex-col items-center w-80"
                 onSubmit={preventSubmit}
@@ -62,24 +52,28 @@ const SignUp: NextPage = (props): JSX.Element => {
                     onChange={(val: string) => setUserInfo({...userInfo, email: val})}
                     type="email"
                     placeholder="Email"
+                    className="mb-2"
                 />
                 <Input
                     value={userInfo.name}
                     onChange={(val: string) => setUserInfo({...userInfo, name: val})}
                     type="text"
                     placeholder="Name"
+                    className="mb-2"
                 />
                 <Input
                     value={userInfo.password}
                     onChange={(val: string) => setUserInfo({...userInfo, password: val})}
                     type="password"
                     placeholder="Password"
+                    className="mb-2"
                 />
                 <Input
                     value={userInfo.confirmpassword}
                     onChange={(val: string) => setUserInfo({...userInfo, confirmpassword: val})}
                     type="password"
                     placeholder="Confirm Password"
+                    className="mb-2"
                 />
                 <Button
                     className="w-1/3 mt-3"
@@ -88,7 +82,7 @@ const SignUp: NextPage = (props): JSX.Element => {
                     SignUp
                 </Button>
             </form>
-        </UnAuthLayout>
+        </GuestLayout>
     )
 }
 

@@ -1,5 +1,4 @@
 import './globals.css'
-
 import Banner from '@/app/banner'
 
 export default function RootLayout({

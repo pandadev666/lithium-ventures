@@ -6,6 +6,4 @@ interface IUser extends Document {
     password: string,
 }
 
-export {
-    IUser
-}
+export { IUser }

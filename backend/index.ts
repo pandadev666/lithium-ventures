@@ -13,14 +13,14 @@ const mongo_uri = process.env.MONGO_URI;
 if (mongo_uri) {
     mongoose.set("strictQuery", false);
     mongoose.connect(mongo_uri)
-        .then((res) => {
+        .then((_) => {
             app.use((cors({
                 origin: process.env.FRONTEND_ORIGIN
             })));
             app.use(express.json())
             
-            app.post('/auth/signup', AuthController.SignUp);
             app.post('/auth/signin', AuthController.SignIn);
+            app.post('/auth/signup', AuthController.SignUp);
 
             app.listen(port, () => {
                 console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
@@ -30,3 +30,6 @@ if (mongo_uri) {
             console.log(err);
         })
     }
+else {
+    console.log("Server can not find mongodb uri in env file.");
+}

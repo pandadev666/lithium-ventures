@@ -1,52 +1,43 @@
 import { Request, Response } from "express";
-import { UserModel } from "./model";
+import { User } from "./model";
 import { IUser } from "./types";
 
 const findUser = async (email: string): Promise< IUser | null> => {
-    return await UserModel.findOne({email});
+    return await User.findOne({email});
 }
 
 const SignIn = async (req: Request, res: Response) => {
     const user = await findUser(req.body.email);
     if (!user) {
-        res.send({
-            status: "fail",
-            error: "User does not exist",
-        })
+        res.status(400);
+        res.send({message: 'User does not exist'});
     }
     else if(user?.password != req.body.password) {
-        res.send({
-            status: "fail",
-            error: "Password does not match",
-        })
+        res.status(400);
+        res.send({message: 'Password is not correct'});
     }
     else {
-        res.send({
-            status: "success",
-            user,
-        })
+        res.send({user})
     }
 }
 
 const SignUp = async (req: Request, res: Response) => {
     const isExist = await findUser(req.body.email);
     if (isExist) {
-        res.send({
-            status: "fail",
-            error: "User Already Exist",
-        })
+        res.status(403);
+        res.send({message: 'User already exists'})
     }
     else {
-        const newUser = new UserModel({
+        const newUser = new User({
             email: req.body.email,
             name: req.body.name,
             password: req.body.password,
         })
         try {
             await newUser.save();
-            res.send({ status: "success" });
-        } catch (e) {
-            res.send({ status: "fail", error: e});
+            res.send({})
+        } catch (err) {
+            throw err;
         }
     }
 }
